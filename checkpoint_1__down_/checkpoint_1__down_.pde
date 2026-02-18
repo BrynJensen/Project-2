@@ -1,17 +1,17 @@
 //checkpoint 1 (down)
 
-int x;
+int y;
 
 void setup() {
  size(300, 300);
- x = -50;
+ y = -50;
 }
 
 void draw() {
  background(255);
- circle(150, x, 100);
- x = x + 1;
- if (x > 350){
-   x = -50; 
+ circle(150, y, 100);
+ y = y + 1;
+ if (y > 350){
+   y = -50; 
  }
 }
