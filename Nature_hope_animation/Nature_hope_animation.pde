@@ -1,6 +1,7 @@
 //hope for the future
 //Lush Nature
 //make bushes move a bit
+//ask about scale for bush
 
 
 void setup() {
@@ -10,9 +11,43 @@ void setup() {
 
 void draw() {
   println(mouseX, mouseY);
+  background(209, 254, 255);
+  
+  //ground
+  noStroke();
+  fill(118, 63, 20);
+  beginShape();
+  vertex(0, 500);
+  vertex(0, 1000);
+  vertex(1200, 1000);
+  vertex(1200, 350);
+  vertex(700, 450);
+  vertex(600, 550);
+  endShape(CLOSE);
+  
+  //background brush
+  noStroke();
+  bush(0, 500, 1, 0, 0);
+  bush(20, 500, 1, 0, 0);
+  bush(0, 520, 1, 0, 0);
+  bush(0, 475, 1, 0, 0);
+  bush(45, 510, 1, 0, 0);
+  bush(40, 480, 1, 0, 0);
+  bush(65, 515, 1, 0, 0);
+  bush(80, 505, 1, 0, 0);
+  bush(120, 520, 1, 0, 0);
+  bush(185, 512, 1, 0, 0);
+  bush(255, 518, 1, 0, 0);
+  bush(300, 530, 1, 0, 0);
+  bush(360, 530, 1, 0, 0);
+  bush(400, 525, 1, 0, 0);
+  bush(455, 530, 1, 0, 0);
+  
+  
+  
+  
+  //trunk1(200, 450, 0.9, 0, -50);
 
-  trunk1(200, 450, 0.9, 0, -50);
-  bush(500, 500, 1, 0);
 }
 
 
@@ -141,13 +176,22 @@ void leaf(float leafX, float leafY, float sze2, float rot2, float opacity2) {
   popMatrix();
 }
 
-void bush(float bushX, float bushY, float sze3, float rot3){
+void bush(float bushX, float bushY, float sze3, float rot3, float shade){
  pushMatrix();
  rotate(radians(rot3));
  scale(sze3);
  translate(bushX, bushY);
- leaf(0, 0, 1, 0, 0);
- leaf(10, 15, 1, 62, 13);
- leaf(5, 5, 1, 118, 29);
+ leaf(0, 0, 1, 0, shade + 0);
+ leaf(10, 15, 1, 62, shade + 13);
+ leaf(5, 8, 1, 118, shade + 29);
+ leaf(12, 0, 1, 82, shade + -24);
+ leaf(-2, -15, 1, -230, shade + 18);
+ leaf(-9, -6, 1.2, 123, shade + -2);
+ leaf(14, 19, 1, -20, shade + 0);
+ leaf(15, -15, 1, 94, shade + 10);
+ leaf(21, 7, 1, 90, shade + 0);
+ leaf(-8, 12, 1, 0, shade + 25);
+ leaf(26, 0, 1, 150, shade + 32);
+ leaf(-15, -3, 1, 0, shade + 0);
  popMatrix();
 }
