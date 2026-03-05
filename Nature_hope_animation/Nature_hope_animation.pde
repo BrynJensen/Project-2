@@ -177,11 +177,11 @@ void draw() {
   trunk(sway + 1155, 220, 0.3, rotat + 5, -40);
     foreleafy(1155, 0, 0.75, 5);
   trunk(sway + 925, 450, 0.9, rotat + 0, -50);
-      foreleafy(878, 0, 1.7, rotat);
+    foreleafy(878, 0, 1.7, rotat);
   trunk(sway +556, 340, 0.4, rotat + -5, -50);
-      foreleafy(500, 48, 1, -5);
+    foreleafy(500, 48, 1, -5);
   trunk(sway + 730, 300, 0.4, rotat + 8, -45);
-      foreleafy(740, 0, 1, 8);
+    foreleafy(740, 0, 1, 8);
   trunk(sway2 + 17, 550, 0.4, rotat2 + -20, -60);
 
 
@@ -537,3 +537,4 @@ void foreleafy2(float foreleafyX2, float foreleafyY2, float sze72, float rot72) 
 
   popMatrix();
 }
+
