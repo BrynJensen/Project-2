@@ -1,10 +1,13 @@
 //hope for the future
 //Lush Nature
-//make bushes move a bit (wind in leaves)
-//if time: add roots, make second tree shape (root = (0,0) so it can sway), add movement to most objects, make tree leaves = longer
-//figure out sway
+//add branches
+//if time: add roots, ADD DEER
+
 
 float sway = 0;
+float sway2 = 0;
+float rotat = 0;
+float rotat2 = 0;
 boolean move = true;
 
 void setup() {
@@ -16,21 +19,80 @@ void draw() {
   println(mouseX, mouseY);
   background(209, 254, 255);
 
+  //movement 1
   if (move) {
-    sway = sway + 1;
-    if (sway >= 30) {
+    sway = sway + 0.05;
+    if (sway >= 2) {
       move = false;
-    } else {
-      sway = sway - 1;
-      if (sway <= -30) {
-        move = true;
-      }
+    }
+  } else {
+    sway = sway - 0.05;
+    if (sway <= -2) {
+      move = true;
     }
   }
 
+  //movement 2
+  if (move) {
+    sway2 = sway2 - 0.05;
+    if (sway2 >= 2) {
+      move = false;
+    }
+  } else {
+    sway2 = sway2 + 0.05;
+    if (sway2 <= -2) {
+      move = true;
+    }
+  }
+
+  //rotate 1
+  if (move) {
+    rotat = rotat + 0.01;
+    if (rotat >= 0.5) {
+      move = false;
+    }
+  } else {
+    rotat = rotat - 0.01;
+    if (rotat <= -0.5) {
+      move = true;
+    }
+  }
+
+  //rotate 2
+  if (move) {
+    rotat2 = rotat2 - 0.01;
+    if (rotat2 >= 0.5) {
+      move = false;
+    }
+  } else {
+    rotat2 = rotat2 + 0.01;
+    if (rotat2 <= -0.5) {
+      move = true;
+    }
+  }
+
+
+  //background trees
+  trunk(sway + 300, 330, 0.4, rotat + 1, -70);
+  trunk(sway2 + 950, 200, 0.4, rotat2 + 3, -60);
+  trunk(sway2 + 760, 300, 0.35, rotat2 + -1, -80);
+  trunk(sway + 638, 400, 0.5, rotat, -75);
+  trunk(sway2 + 444, 350, 0.4, rotat2 + 5, -70);
+  trunk(sway + 50, 400, 0.4, rotat, -50);
+
+
+  //background leaves
+  backleafy(274, 52, 1, 1);
+  backleafy2(935, -70, 1, 3);
+  backleafy2(735, 60, 0.9, -1);
+  backleafy(600, 30, 1.2, 0);
+  backleafy2(439, 55, 1, 5);
+  backleafy(18, 109, 1, 0);
+
+
   //ground
   noStroke();
-  fill(118, 63, 20);
+  fill(67, 35, 2);
   beginShape();
   vertex(0, 500);
   vertex(0, 1000);
@@ -39,6 +101,8 @@ void draw() {
   vertex(700, 450);
   vertex(600, 550);
   endShape(CLOSE);
+
+
 
   //background brush
   noStroke();
@@ -77,8 +141,6 @@ void draw() {
   bush(1190, 350, 1.4, 27, 12);
   bush(780, 485, 2, 92, -50);
   bush(225, 567, 2, 158, -50);
-  bush(1140, 435, 2, 92, -50);
-  bush(970, 430, 2, 0, -50);
 
 
 
@@ -87,37 +149,50 @@ void draw() {
   ground(365, 625, 3, 0, -15);
   ground(61, 642, 2.9, 61, -8);
   ground(181, 760, 3.1, -60, 0);
-  ground(1071, 573, 3, 184, -9);
-  ground(888, 641, 3, 0, 8);
-  ground(596, 749, 2.8, 15, 12);
-  ground(362, 818, 3, -94, 18);
-  ground(914, 750, 2.9, 853, 24);
-  ground(1100, 832, 3.1, 173, 20);
-  ground(902, 928, 3, 102, 28);
-  ground(741, 850, 3, 92, 22);
-  ground(576, 924, 3.5, 1936, 21);
-  ground(251, 940, 3, 5843, 18);
-  ground(59, 875, 2.8, 235, 27);
+  ground(1071, 573, 3, 184, 39);
+  ground(888, 641, 3, 0, 30);
+  ground(596, 749, 2.8, 15, 32);
+  ground(362, 818, 3, -94, 38);
+  ground(914, 750, 2.9, 853, 34);
+  ground(1100, 832, 3.1, 173, 30);
+  ground(902, 928, 3, 102, 38);
+  ground(741, 850, 3, 92, 32);
+  ground(576, 924, 3.5, 1936, 41);
+  ground(251, 940, 3, 5843, 38);
+  ground(59, 875, 2.8, 235, 40);
 
 
 
-  //trees
-  trunk(sway + 200, 450, 0.9, 0, -50);
-  trunk(1050, 250, 0.7, -6, -25);
-  trunk(825, 300, 0.6, 2, -59);
-  trunk(95, 300, 0.5, -3, -27);
-  trunk(406, 300, 0.8, 0, -35);
-  trunk(1155, 220, 0.3, 5, -40);
-  trunk(925, 450, 0.9, 0, -50);
-  trunk(556, 340, 0.4, -5, -50);
-  trunk(730, 300, 0.4, 8, -45);
-  trunk(17, 550, 0.4, -20, -60);
+  //trees + their leaf
+  trunk(sway + 200, 450, 0.9, rotat + 0, -50);
+    foreleafy(152, 0, 1.7, rotat);
+  trunk(sway + 1050, 250, 0.7, rotat + -6, -25);
+    foreleafy(970, -150, 1.4, -6);
+  trunk(sway2 + 825, 300, 0.6, rotat2 + 2, -59);
+    foreleafy2(800, -100, 1.3, 2);
+  trunk(sway + 95, 300, 0.5, rotat + -3, -27);
+    foreleafy(47, -50, 1.2, -3);
+  trunk(sway2 + 406, 300, 0.8, rotat2 + 0, -35);
+    foreleafy2(365, -100, 1.6, rotat2);
+  trunk(sway + 1155, 220, 0.3, rotat + 5, -40);
+    foreleafy(1155, 0, 0.75, 5);
+  trunk(sway + 925, 450, 0.9, rotat + 0, -50);
+      foreleafy(878, 0, 1.7, rotat);
+  trunk(sway +556, 340, 0.4, rotat + -5, -50);
+      foreleafy(500, 48, 1, -5);
+  trunk(sway + 730, 300, 0.4, rotat + 8, -45);
+      foreleafy(740, 0, 1, 8);
+  trunk(sway2 + 17, 550, 0.4, rotat2 + -20, -60);
+
 
 
 
   //lower greenery
   bush(1121, 565, 0.9, 523, -50);
   bush(520, 600, 2, 263, -50);
+
+  bush(1140, 435, 2, 92, -50);
+  bush(970, 430, 2, 0, -50);
 }
 
 
@@ -305,5 +380,160 @@ void bush(float bushX, float bushY, float sze3, float rot3, float shade) {
   leaf(-8, 12, 1, 0, shade + 25);
   leaf(26, 0, 1, 150, shade + 32);
   leaf(-15, -3, 1, 0, shade + 0);
+  popMatrix();
+}
+
+void backleafy(float leafyX, float leafyY, float sze6, float rot6) {
+  pushMatrix();
+  translate(leafyX, leafyY);
+  rotate(radians(rot6));
+  scale(sze6);
+
+  //top to bottom of tree
+
+  bush(sway + -13, sway2 + 0, 0.6, 352, 0);
+  bush(sway + -2, sway2 + 20, 0.6, 352, 0);
+  bush(sway + -7, sway2 + 40, 0.6, 352, 0);
+  bush(sway + 7, sway2 + 68, 0.6, 352, 0);
+  bush(sway + -9, sway2 + 99, 0.6, 352, 0);
+  bush(sway + 9, sway2 + 99, 0.6, 351, 0);
+  bush(sway + -8, sway2 + 130, 0.6, 352, 0);
+  bush(sway + 7, sway2 + 140, 0.6, 352, 0);
+  bush(sway + 2, sway2 + 170, 0.6, 352, 0);
+  bush(sway + 17, sway2 + 170, 0.6, 352, 0);
+  bush(sway + 36, sway2 + 170, 0.6, 352, 0);
+  bush(sway + -6, sway2 + 190, 0.6, 352, 0);
+  bush(sway + 26, sway2 + 200, 0.6, 352, 0);
+  bush(sway + 8, sway2 + 230, 0.6, 352, 0);
+  bush(sway + 12, sway2 + 250, 0.6, 352, 0);
+  bush(sway + 7, sway2 + 273, 0.6, 352, 0);
+  bush(sway + 18, sway2 + 280, 0.6, 352, 0);
+  bush(sway + 17, sway2 + 290, 0.6, 352, 0);
+  bush(sway + 0, sway2 + 310, 0.6, 352, 0);
+  bush(sway + 7, sway2 + 330, 0.6, 352, 0);
+  bush(sway + 17, sway2 + 310, 0.6, 352, 0);
+  bush(sway + 17, sway2 + 345, 0.6, 352, 0);
+  bush(sway + 12, sway2 + 380, 0.6, 352, 0);
+  bush(sway + 10, sway2 + 400, 0.6, 352, 0);
+  bush(sway + 26, sway2 + 400, 0.6, 352, 0);
+
+
+  popMatrix();
+}
+
+
+void backleafy2(float leafyX2, float leafyY2, float sze62, float rot62) {
+  pushMatrix();
+  translate(leafyX2, leafyY2);
+  rotate(radians(rot62));
+  scale(sze62);
+
+  //top to bottom of tree
+
+  bush(sway2 + -13, sway + 0, 0.6, 352, 0);
+  bush(sway2 + -2, sway + 20, 0.6, 352, 0);
+  bush(sway2 + -7, sway + 40, 0.6, 352, 0);
+  bush(sway2 + 7, sway + 68, 0.6, 352, 0);
+  bush(sway2 + -9, sway + 99, 0.6, 352, 0);
+  bush(sway2 + 9, sway + 99, 0.6, 351, 0);
+  bush(sway2 + -8, sway + 130, 0.6, 352, 0);
+  bush(sway2 + 7, sway + 140, 0.6, 352, 0);
+  bush(sway2 + 2, sway + 170, 0.6, 352, 0);
+  bush(sway2 + 17, sway + 170, 0.6, 352, 0);
+  bush(sway2 + 36, sway + 170, 0.6, 352, 0);
+  bush(sway2 + -6, sway + 190, 0.6, 352, 0);
+  bush(sway2 + 26, sway + 200, 0.6, 352, 0);
+  bush(sway2 + 8, sway + 230, 0.6, 352, 0);
+  bush(sway2 + 12, sway + 250, 0.6, 352, 0);
+  bush(sway2 + 7, sway + 273, 0.6, 352, 0);
+  bush(sway2 + 18, sway + 280, 0.6, 352, 0);
+  bush(sway2 + 17, sway + 290, 0.6, 352, 0);
+  bush(sway2 + 0, sway + 310, 0.6, 352, 0);
+  bush(sway2 + 7, sway + 330, 0.6, 352, 0);
+  bush(sway2 + 17, sway + 310, 0.6, 352, 0);
+  bush(sway2 + 17, sway + 345, 0.6, 352, 0);
+  bush(sway2 + 12, sway + 380, 0.6, 352, 0);
+  bush(sway2 + 10, sway + 400, 0.6, 352, 0);
+  bush(sway2 + 26, sway + 400, 0.6, 352, 0);
+
+
+  popMatrix();
+}
+
+
+void foreleafy(float foreleafyX, float foreleafyY, float sze7, float rot7) {
+  pushMatrix();
+  translate(foreleafyX, foreleafyY);
+  rotate(radians(rot7));
+  scale(sze7);
+
+  //top to bottom of tree
+
+  bush(sway + -13, sway2 + 0, 0.6, 352, 0);
+  bush(sway + -2, sway2 + 20, 0.6, 352, 0);
+  bush(sway + -7, sway2 + 40, 0.6, 352, 0);
+  bush(sway + 7, sway2 + 68, 0.6, 352, 0);
+  bush(sway + -9, sway2 + 99, 0.6, 352, 0);
+  bush(sway + 9, sway2 + 99, 0.6, 351, 0);
+  bush(sway + -8, sway2 + 130, 0.6, 352, 0);
+  bush(sway + 7, sway2 + 140, 0.6, 352, 0);
+  bush(sway + 2, sway2 + 170, 0.6, 352, 0);
+  bush(sway + 17, sway2 + 170, 0.6, 352, 0);
+  bush(sway + 36, sway2 + 170, 0.6, 352, 0);
+  bush(sway + -6, sway2 + 190, 0.6, 352, 0);
+  bush(sway + 26, sway2 + 200, 0.6, 352, 0);
+  bush(sway + 8, sway2 + 230, 0.6, 352, 0);
+  bush(sway + 12, sway2 + 250, 0.6, 352, 0);
+  bush(sway + 7, sway2 + 273, 0.6, 352, 0);
+  bush(sway + 18, sway2 + 280, 0.6, 352, 0);
+  bush(sway + 17, sway2 + 290, 0.6, 352, 0);
+  bush(sway + 0, sway2 + 310, 0.6, 352, 0);
+  bush(sway + 7, sway2 + 330, 0.6, 352, 0);
+  bush(sway + 17, sway2 + 310, 0.6, 352, 0);
+  bush(sway + 17, sway2 + 345, 0.6, 352, 0);
+  bush(sway + 12, sway2 + 380, 0.6, 352, 0);
+  bush(sway + 10, sway2 + 400, 0.6, 352, 0);
+  bush(sway + 26, sway2 + 400, 0.6, 352, 0);
+
+
+  popMatrix();
+}
+
+
+void foreleafy2(float foreleafyX2, float foreleafyY2, float sze72, float rot72) {
+  pushMatrix();
+  translate(foreleafyX2, foreleafyY2);
+  rotate(radians(rot72));
+  scale(sze72);
+
+  //top to bottom of tree
+
+  bush(sway2 + -13, sway + 0, 0.6, 352, 0);
+  bush(sway2 + -2, sway + 20, 0.6, 352, 0);
+  bush(sway2 + -7, sway + 40, 0.6, 352, 0);
+  bush(sway2 + 7, sway + 68, 0.6, 352, 0);
+  bush(sway2 + -9, sway + 99, 0.6, 352, 0);
+  bush(sway2 + 9, sway + 99, 0.6, 351, 0);
+  bush(sway2 + -8, sway + 130, 0.6, 352, 0);
+  bush(sway2 + 7, sway + 140, 0.6, 352, 0);
+  bush(sway2 + 2, sway + 170, 0.6, 352, 0);
+  bush(sway2 + 17, sway + 170, 0.6, 352, 0);
+  bush(sway2 + 36, sway + 170, 0.6, 352, 0);
+  bush(sway2 + -6, sway + 190, 0.6, 352, 0);
+  bush(sway2 + 26, sway + 200, 0.6, 352, 0);
+  bush(sway2 + 8, sway + 230, 0.6, 352, 0);
+  bush(sway2 + 12, sway + 250, 0.6, 352, 0);
+  bush(sway2 + 7, sway + 273, 0.6, 352, 0);
+  bush(sway2 + 18, sway + 280, 0.6, 352, 0);
+  bush(sway2 + 17, sway + 290, 0.6, 352, 0);
+  bush(sway2 + 0, sway + 310, 0.6, 352, 0);
+  bush(sway2 + 7, sway + 330, 0.6, 352, 0);
+  bush(sway2 + 17, sway + 310, 0.6, 352, 0);
+  bush(sway2 + 17, sway + 345, 0.6, 352, 0);
+  bush(sway2 + 12, sway + 380, 0.6, 352, 0);
+  bush(sway2 + 10, sway + 400, 0.6, 352, 0);
+  bush(sway2 + 26, sway + 400, 0.6, 352, 0);
+
+
   popMatrix();
 }
