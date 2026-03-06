@@ -1,8 +1,17 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
 //hope for the future
 //Lush Nature
 //add branches
-//if time: add roots, ADD DEER
+//if time: add roots, add animal, add sound track
 
+Minim minim;
+AudioPlayer bird;
 
 float sway = 0;
 float sway2 = 0;
@@ -12,6 +21,10 @@ boolean move = true;
 
 void setup() {
   size(1200, 1000, P2D);
+  
+  minim = new Minim(this);
+  bird = minim.loadFile("bird.mp3");
+  bird.loop();
 }
 
 
@@ -32,7 +45,7 @@ void draw() {
     }
   }
 
-  //movement 2
+  //movement 2 (opposite of 1)
   if (move) {
     sway2 = sway2 - 0.05;
     if (sway2 >= 2) {
@@ -58,7 +71,7 @@ void draw() {
     }
   }
 
-  //rotate 2
+  //rotate 2 (opposite of 1)
   if (move) {
     rotat2 = rotat2 - 0.01;
     if (rotat2 >= 0.5) {
@@ -73,12 +86,25 @@ void draw() {
 
 
   //background trees
+      branch(sway + 283, 2*sway2 + 400, 0.3, rotat -50, -25);
   trunk(sway + 300, 330, 0.4, rotat + 1, -70);
+  
+  
   trunk(sway2 + 950, 200, 0.4, rotat2 + 3, -60);
+  
+  
   trunk(sway2 + 760, 300, 0.35, rotat2 + -1, -80);
+  
+  
   trunk(sway + 638, 400, 0.5, rotat, -75);
+  
+  
   trunk(sway2 + 444, 350, 0.4, rotat2 + 5, -70);
+  
+  
   trunk(sway + 50, 400, 0.4, rotat, -50);
+  
+  
 
 
   //background leaves
@@ -164,26 +190,44 @@ void draw() {
 
 
   //trees + their leaf
-  trunk(sway + 200, 450, 0.9, rotat + 0, -50);
-    foreleafy(152, 0, 1.7, rotat);
+
   trunk(sway + 1050, 250, 0.7, rotat + -6, -25);
     foreleafy(970, -150, 1.4, -6);
+    
+    
   trunk(sway2 + 825, 300, 0.6, rotat2 + 2, -59);
     foreleafy2(800, -100, 1.3, 2);
+    
+    
   trunk(sway + 95, 300, 0.5, rotat + -3, -27);
     foreleafy(47, -50, 1.2, -3);
+    
+    branch(396, sway + 349, 0.6, 3*rotat2 -50, -25);
   trunk(sway2 + 406, 300, 0.8, rotat2 + 0, -35);
     foreleafy2(365, -100, 1.6, rotat2);
+    
+    branch(sway + 1142, sway2 + 225, 0.4, rotat2 -130, -25);
   trunk(sway + 1155, 220, 0.3, rotat + 5, -40);
     foreleafy(1155, 0, 0.75, 5);
+    
+    branch(900, -sway + 610, 0.9, 4*rotat -130, -25);
   trunk(sway + 925, 450, 0.9, rotat + 0, -50);
     foreleafy(878, 0, 1.7, rotat);
+    
+    branch(sway + 550, -sway + 400, 0.6, rotat2 -130, -25);
   trunk(sway +556, 340, 0.4, rotat + -5, -50);
     foreleafy(500, 48, 1, -5);
+    
+    
   trunk(sway + 730, 300, 0.4, rotat + 8, -45);
     foreleafy(740, 0, 1, 8);
+    
   trunk(sway2 + 17, 550, 0.4, rotat2 + -20, -60);
 
+    branch(sway + 159, -sway + 356, 0.8, rotat2 -130, -25);
+    branch(204, -sway + 645, 0.6, rotat2 -50, -25);
+  trunk(sway + 200, 450, 0.9, rotat + 0, -50);
+    foreleafy(152, 0, 1.7, rotat);
 
 
 
@@ -193,6 +237,9 @@ void draw() {
 
   bush(1140, 435, 2, 92, -50);
   bush(970, 430, 2, 0, -50);
+  
+  
+
 }
 
 
@@ -538,3 +585,50 @@ void foreleafy2(float foreleafyX2, float foreleafyY2, float sze72, float rot72) 
   popMatrix();
 }
 
+void branch(float BRX, float BRY, float sze8, float rot8, float opacity8) {
+  pushMatrix();
+  translate(BRX, BRY);
+  scale(sze8);
+  rotate(radians(rot8));
+  
+  //wood
+  fill(opacity8 + 124, opacity8 + 85, opacity8 + 49);
+  noStroke();
+  beginShape();
+  vertex(0, 0);
+  vertex(10, 0);
+  vertex(30, 5);
+  vertex(56, 15);
+  vertex(68, 10);
+  vertex(85, 13);
+  vertex(103, 19);
+  vertex(130, 16);
+  vertex(157, 9);
+  vertex(180, 0);
+  vertex(210, 3);
+  vertex(240, -3);
+  vertex(280, -5);
+    //back
+  vertex(240, -6);
+  vertex(210, -5);
+  vertex(180, -10);
+  vertex(157, -2);
+  vertex(130, 4);
+  vertex(103, 9);
+  vertex(85, 2);
+  vertex(68, -1);
+  vertex(56, 5);
+  vertex(30, -5);
+  vertex(10, -12);
+  vertex(0, -12);  
+  endShape(CLOSE);
+  
+  //leafs
+  bush(10, 0, 1, 0, -opacity8 + 0);
+  bush(56, 15, 1, 0, -opacity8 + 10);
+  bush(85, 13, 1, 0, -opacity8 + -3);
+  bush(130, 16, 1, 0, -opacity8 + 1);
+  bush(180, 0, 1, 0, -opacity8 + 7);
+  bush(240, -3, 1, 0, -opacity8 + -6);
+  popMatrix();
+}
