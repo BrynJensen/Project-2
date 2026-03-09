@@ -7,8 +7,6 @@ import ddf.minim.ugens.*;
 
 //hope for the future
 //Lush Nature
-//add branches
-//if time: add roots, add animal, add sound track
 
 Minim minim;
 AudioPlayer bird;
@@ -18,6 +16,7 @@ float sway2 = 0;
 float rotat = 0;
 float rotat2 = 0;
 boolean move = true;
+boolean moverot = true;
 
 void setup() {
   size(1200, 1000, P2D);
@@ -29,17 +28,18 @@ void setup() {
 
 
 void draw() {
-  println(mouseX, mouseY);
+  //println(mouseX, mouseY);
+  println(sway, sway2);
   background(209, 254, 255);
 
-  //movement 1
+  //movement 1 (x axis)
   if (move) {
-    sway = sway + 0.05;
+    sway = sway + 0.08;
     if (sway >= 2) {
       move = false;
     }
   } else {
-    sway = sway - 0.05;
+    sway = sway - 0.08;
     if (sway <= -2) {
       move = true;
     }
@@ -47,45 +47,33 @@ void draw() {
 
   //movement 2 (opposite of 1)
   if (move) {
-    sway2 = sway2 - 0.05;
-    if (sway2 >= 2) {
-      move = false;
-    }
+    sway2 = sway2 - 0.08;
   } else {
-    sway2 = sway2 + 0.05;
-    if (sway2 <= -2) {
-      move = true;
+    sway2 = sway2 + 0.08;
     }
-  }
-
-  //rotate 1
-  if (move) {
-    rotat = rotat + 0.01;
+    
+  //rotate 1 (rotations of objects)
+  if (moverot) {
+    rotat = rotat + 0.02;
     if (rotat >= 0.5) {
-      move = false;
+      moverot = false;
     }
   } else {
-    rotat = rotat - 0.01;
+    rotat = rotat - 0.02;
     if (rotat <= -0.5) {
-      move = true;
+      moverot = true;
     }
   }
 
   //rotate 2 (opposite of 1)
-  if (move) {
-    rotat2 = rotat2 - 0.01;
-    if (rotat2 >= 0.5) {
-      move = false;
-    }
+  if (moverot) {
+    rotat2 = rotat2 - 0.02;
   } else {
-    rotat2 = rotat2 + 0.01;
-    if (rotat2 <= -0.5) {
-      move = true;
-    }
+    rotat2 = rotat2 + 0.02;
   }
 
 
-  //background trees
+  //background trees on ridge
       branch(sway + 283, 2*sway2 + 400, 0.3, rotat -50, -25);
   trunk(sway + 300, 330, 0.4, rotat + 1, -70);
   
@@ -116,7 +104,7 @@ void draw() {
   backleafy(18, 109, 1, 0);
 
 
-  //ground
+  //ground main shape
   noStroke();
   fill(67, 35, 2);
   beginShape();
@@ -189,7 +177,7 @@ void draw() {
 
 
 
-  //trees + their leaf
+  //trees + their leafs + their branches
 
   trunk(sway + 1050, 250, 0.7, rotat + -6, -25);
     foreleafy(970, -150, 1.4, -6);
@@ -231,7 +219,7 @@ void draw() {
 
 
 
-  //lower greenery
+  //lower greenery on ground
   bush(1121, 565, 0.9, 523, -50);
   bush(520, 600, 2, 263, -50);
 
